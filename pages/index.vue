@@ -55,7 +55,7 @@ export default {
         "project/new",
         this.projectName
       );
-      response ? this.$router.push({ path: `project/${response.id}` }) : "";
+      response ? this.$router.push({ path: `project/${response.id}/incomeProgram` }) : "";
     }
   }
 };
