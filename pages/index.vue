@@ -91,6 +91,7 @@ export default {
 	},
 	async created() {
 		this.projects = await this.$store.dispatch("project/getAll");
+		this.projects.sort(this.compareProjects).reverse();
 	},
 	methods: {
 		async CreateNewProject() {
@@ -100,7 +101,8 @@ export default {
 
 			const response = await this.$store.dispatch("project/new", {
 				name: this.projectName,
-				desc: this.projectDesc ? this.projectDesc : "No description!"
+				desc: this.projectDesc ? this.projectDesc : "No description!",
+				date: Date.now()
 			});
 
 			response
@@ -108,6 +110,17 @@ export default {
 						path: `project/${response}/incomeProgram`
 				  })
 				: "";
+		},
+		compareProjects(pA, pB) {
+			if (pA.date < pB.date) {
+				return -1;
+			}
+
+			if (pA.date > pB.date) {
+				return 1;
+			}
+
+			return 0;
 		}
 	}
 };
