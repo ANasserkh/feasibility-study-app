@@ -31,10 +31,6 @@
 <script>
 import totalCalculator from "~/mixins/totalCalculators";
 export default {
-	validate({ params }) {
-		// Must be a number
-		return /^\d+$/.test(params.id);
-	},
 	mixins: [totalCalculator],
 	data() {
 		return {
