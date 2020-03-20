@@ -1,13 +1,12 @@
 <template>
   <v-container>
     <v-row justify="center">
-      <v-col md="8">
+      <v-col>
         <div class="d-flex flex-row-reverse">
           <v-dialog v-model="dialog" max-width="600">
             <template v-slot:activator="{ on }">
               <v-btn color="orange mb-2" v-on="on">New Project</v-btn>
-            </template>
-
+            </template> 
             <v-card>
               <v-form ref="form" lazy-validation v-on:submit.prevent="CreateNewProject()">
                 <v-card-title class="headline" primary-title>New Project</v-card-title>
@@ -53,19 +52,15 @@
         <v-card v-else tile>
           <v-card-title>PROJECTS</v-card-title>
           <v-list two-line>
-            <v-list-item-group color="primary">
-              <v-list-item
-                v-for="project in projects"
-                :key="project.id"
-                nuxt
-                :to="`/project/${project.id}/incomeProgram`"
-              >
+            <template v-for="(project,index) in projects">
+              <v-list-item :key="project.id" nuxt :to="`/project/${project.id}/incomeProgram`">
                 <v-list-item-content>
-                  <v-list-item-title v-html="project.name"></v-list-item-title>
-                  <v-list-item-subtitle v-html="project.desc"></v-list-item-subtitle>
+                  <v-list-item-title>{{project.name}}</v-list-item-title>
+                  <v-list-item-subtitle>{{project.desc}}</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
-            </v-list-item-group>
+              <v-divider v-if="index < projects.length -1" :key="index"></v-divider>
+            </template>
           </v-list>
         </v-card>
       </v-col>
